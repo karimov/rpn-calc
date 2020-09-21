@@ -3,3 +3,11 @@
 
 *.gif
 README.md
+
+*.todo
+
+venv/
+env/
+
+__pycache__/
+*.pyc

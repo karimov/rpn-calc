@@ -109,6 +109,12 @@ class RpnCalc(object):
             val = self._register[cmd]
             self.run_command(val)
             return res, err
+        elif cmd == "cla":
+            self._register = {}
+            self._macros = {}
+            self.stack.clear_stack()
+        elif cmd == "clv":
+            self._register = {}
         elif cmd == "quit":
             sys.exit(0)
         elif cmd == "repeat":

@@ -20,7 +20,8 @@ class Stack(object):
                             "dropn":(self.dropn,1),
                             "swap":(self.swap,0),
                             "roll": (self.roll, 1),
-                            "rolld":(self.rolld,1)}
+                            "rolld":(self.rolld,1),
+                            "clr": (self.clear_stack, 0)}
 
     def append(self, value):
         self._stack.append(value)
@@ -72,7 +73,9 @@ class Stack(object):
         '''
         Removes all elements of stack
         '''
+        res, err = None, None
         self._stack = []
+        return res, err
 
     def peak(self):
         if len(self) > 0:

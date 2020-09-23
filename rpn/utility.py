@@ -47,7 +47,7 @@ def display_basic(iterable, type, mode='dec'):
             yield f"{key}:{val}"
     elif type == 'stack':
         for num in iterable:
-            yield f"{modes[mode](num)}"
+            yield f"{modes[mode](num).upper()}"
     else:
         yield f"{iterable}\n"
 

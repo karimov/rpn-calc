@@ -6,6 +6,8 @@ README.md
 
 *.todo
 
+.vscode
+
 venv/
 env/
 

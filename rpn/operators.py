@@ -3,6 +3,7 @@
 Basic arithmetic operations
 '''
 import operator
+from typing import NamedTuple
 
 class Operator(object):
 
@@ -42,10 +43,44 @@ class Mul(Operator):
         res, error = operator.mul(a2, a1), None
         return res, error
 
+# Comperison operators
+class Greater(Operator):
+
+    def __call__(self, x, y):
+        return x > y, None
+
+class Less(Operator):
+
+    def __call__(self, x, y):
+        return x < y, None
+
+class Equal(Operator):
+    def __call__(self, x,y):
+        return x == y, None
+
+class GreaterEqual(Operator):
+    def __call__(self, x, y):
+        return x >= y, None
+
+class LessEqual(Operator):
+    def __call__(self, x,y):
+        return x <= y, None
+
+class NotEqual(Operator):
+    def __call__(self, x,y):
+        return x != y, None
 
 basic_operators = [
+    # arithmetic operators
     Add(opcode="+", desc="addition",num_params=2),
     Sub(opcode="-",desc="subtraction",num_params=2),
     Mul(opcode="*", desc="multiplication", num_params=2),
     Div(opcode="/",desc="division",num_params=2),
+    # comparison operators
+    Greater(opcode=">",desc="Greater than",num_params=2),
+    GreaterEqual(opcode=">=", desc="Greater than or equal", num_params=2),
+    Less(opcode="<",desc="Less than", num_params=2),
+    LessEqual(opcode="<=",desc="Less than or equal", num_params=2),
+    NotEqual(opcode="!=", desc="Not equal", num_params=2),
+    Equal(opcode="==", desc="Equal", num_params=2)
     ]

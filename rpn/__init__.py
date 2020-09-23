@@ -82,11 +82,11 @@ class RpnCalc(object):
         for cmd in commands:
             res, err = self.run_command(cmd)
             if err is not None:
-                display(err, bg=ColorsSet.Yellow) # TODO: change way of printing the result
+                display(err, bg=ColorsSet.Yellow) # TODO: change the way of printing the result
             if res is not None:
                 display(res, bg=ColorsSet.Green)
 
-    def run_command(self, cmd):
+    def run_command(self, cmd): # TODO: checkout chain of responsibilities pattern
         res, err = None, None
         if isinstance(cmd, (float, int)):
             self.stack.append(cmd)
@@ -113,7 +113,7 @@ class RpnCalc(object):
             sys.exit(0)
         elif cmd == "repeat":
             return res, f"Takes two arguments"
-        elif cmd.endswith("="):
+        elif cmd.endswith("=") and cmd[:-1].isalpha():
             if len(self.stack) < 0:
                 return res, f"Not enough elements in the stack"
             val = self.stack.pop()
@@ -130,7 +130,7 @@ class RpnCalc(object):
                 return res, f"Not enough elements in the stack"
             args = list(self.stack.popn(n=op.num_params))
             res, err = op(*args)
-            if err is not None:
+            if err is not None or type(res) is bool:
                 self.stack.extend(args[::-1])
                 return res, err
             self.stack.append(res) # TODO: res is vector value

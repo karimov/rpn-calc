@@ -136,10 +136,10 @@ class RpnCalc(object):
             op = self._operators[cmd]
             if len(self.stack) < op.num_params:
                 return res, f"Not enough elements in the stack"
-            args = list(self.stack.popn(n=op.num_params))
+            args = list(self.stack.popn(n=op.num_params))[::-1]
             res, err = op(*args)
             if err is not None or type(res) is bool:
-                self.stack.extend(args[::-1])
+                self.stack.extend(args)
                 return res, err
             self.stack.append(res) # TODO: res is vector value
 

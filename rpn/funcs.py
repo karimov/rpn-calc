@@ -104,14 +104,12 @@ class Log(Operator):
         res, err = None, None
         if not (x > 0 and base > 0):
             return res, "x and base must be > 0"
-        if base != math.e:
-            x, base = base, x
         return math.log(x, base), err
 
 Ln = Log
 
 class Pow(Operator):
-    def __call__(self, y, x):
+    def __call__(self, x, y):
         ''' Returns x**y (x to the power of y) '''
         return x**y, None
 

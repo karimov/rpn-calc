@@ -19,41 +19,41 @@ class Operator(object):
 class Add(Operator):
 
     def __call__(self, a1, a2):
-        res, error = operator.add(a2,a1), None
+        res, error = operator.add(a1,a2), None
         return res, error
 
 class Sub(Operator):
 
     def __call__(self, a1, a2):
-        res, error = operator.sub(a2, a1), None
+        res, error = operator.sub(a1, a2), None
         return res, error
 
 class Div(Operator):
 
     def __call__(self, a1, a2):
         res, error = None, None
-        if a1 == 0:
+        if a2 == 0:
             error = "Division by zero"
             return res, error
-        res = a2 / a1
+        res = a1 / a2
         return res if not res.is_integer() else int(res), error
 
 class Mul(Operator):
 
     def __call__(self, a1, a2):
-        res, error = operator.mul(a2, a1), None
+        res, error = operator.mul(a1, a2), None
         return res, error
 
 # Comperison operators
 class Greater(Operator):
 
     def __call__(self, x, y):
-        return y > x, None
+        return x > y, None
 
 class Less(Operator):
 
     def __call__(self, x, y):
-        return y < x, None
+        return x < y, None
 
 class Equal(Operator):
     def __call__(self, x,y):
@@ -61,11 +61,11 @@ class Equal(Operator):
 
 class GreaterEqual(Operator):
     def __call__(self, x, y):
-        return y >= x, None
+        return x >= y, None
 
 class LessEqual(Operator):
     def __call__(self, x,y):
-        return y <= x, None
+        return x <= y, None
 
 class NotEqual(Operator):
     def __call__(self, x,y):
@@ -73,7 +73,7 @@ class NotEqual(Operator):
 
 class Mod(Operator):
     def __call__(self, x, y):
-        return y % x, None
+        return x % y, None
     
 class Increment(Operator):
     def __call__(self, x):
@@ -89,7 +89,7 @@ class And(Operator):
     def __call__(self, x, y):
         res, err = None, None
         if _is(x, int) and _is(y, int):
-            return x & y, err
+            return y & x, err
         return res, f"operand(s) must be type(s) of 'int'"
 
 class Or(Operator):

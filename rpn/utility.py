@@ -26,18 +26,19 @@ class ColorSchema:
     FAIL = ColorsSet.Red
     ENDC = ColorsSet.Reset
 
-def display(iterable, type=None, bg=ColorsSet.White, bracket=None, mode='dec'):
+def display(iterable, type=None, bg=ColorsSet.White, bracket=None, mode='default'):
     disable = '\u001b[0m'
     print(f"{bg}{bracket[0] if bracket else ''}{disable}",end='')
     for item in display_basic(iterable, type, mode):
         _print(item, code=bg)
     print(f"{bg}{bracket[1] if bracket else ''}{disable}",end='')
 
-def display_basic(iterable, type, mode='dec'):
+def display_basic(iterable, type, mode='default'):
     modes = {"hex": "{:x}".format,
         "bin": "{:b}".format,
         "oct": "{:o}".format,
-        "dec":"{:d}".format}
+        "dec":"{:d}".format,
+        "default": "{}".format}
 
     if type == "register":
         for key, val in iterable.items():

@@ -6,6 +6,7 @@ trigonometric, mathematical functions,
 '''
 
 from math import atan, cosh
+from os import terminal_size
 from .operators import Operator
 
 import math
@@ -128,16 +129,98 @@ class Pow(Operator):
       max        Max
       min        Min
 '''
-# class Round(operators):
-#     def __call__(self, number, ndigits=None):
-#         '''Round a number to a given precision in decimal digits.
+class Round(Operator):
+    def __call__(self, number, ndigits=None):
+        '''Round a number to a given precision in decimal digits.
             
-#             The return value is an integer if ndigits is omitted or None.  Otherwise
-#             the return value has the same type as the number.  ndigits may be negative.
-#         '''
-#         res, err = None, None            
+            The return value is an integer if ndigits is omitted or None.  Otherwise
+            the return value has the same type as the number.  ndigits may be negative.
+        '''
+        res, err = None, None
+        try:
+            res = round(number=number, ndigits=ndigits)
+        except Exception as e:
+            return None, e
+        return res, err
+
+Roundn = Round
+
+class Ceil(Operator):
+    def __call__(self, x):
+        ''' Return the ceiling of x as an Integral.
+            This is the smallest integer >= x.
+        '''
+        res, err = None, None
+        try:
+            res = math.ceil(x)
+        except Exception as e:
+            return res,e
+        return res, err
+
+class Floor(Operator):
+    def __call__(self, x):
+        '''Return the floor of x as an Integral.
+            This is the largest integer <= x.
+        '''
+        res, err = None, None
+        try:
+            res = math.floor(x)
+        except Exception as e:
+            return res,e
+        return res, err
 
 
+class Abs(Operator):
+    def __call__(self, x):
+        '''Return the absolute value of the argument.'''
+        res, err = None, None
+        try:
+            res = abs(x)
+        except Exception as e:
+            return res,e
+        return res, err
+
+class Min(Operator):
+    def __call__(self, x, y):
+        '''Returns the lowest of x or y	'''
+        res, err = None, None
+        try:
+            res = min([x,y])
+        except Exception as e:
+            return res,e
+        return res, err
+
+class Max(Operator):
+    def __call__(self, x, y):
+        '''Returns the heighest  of x or y	'''
+        res, err = None, None
+        try:
+            res = max([x,y])
+        except Exception as e:
+            return res,e
+        return res, err
+
+class Modf(Operator):
+    def __init__(self, ip=False, fp=False,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.ip = ip
+        self.fp = fp
+
+    def __call__(self, x):
+        '''Returns fractional and integral parts of x.
+            Result carry sign of x and both are float 
+        '''
+        res, err = None, None
+        try:
+            res = math.modf(x)
+        except Exception as e:
+            return res, e
+        
+        if self.ip is True:
+            return res[1], err
+        if self.fp is True:
+            return res[0], err
+        return res, err
 
 
 functional_operators = [
@@ -158,4 +241,15 @@ functional_operators = [
     Ln(opcode="ln", desc="Natural logarithm",num_params=1),
     Log(opcode="log", desc="Logarithm", num_params=2),
     Pow(opcode="pow", desc="Raise a number to a power", num_params=2),
+    # Numeric utilities
+    Round(opcode="round", desc="Round the number to ceiling", num_params=1),
+    Roundn(opcode="roundn", desc="Round the number to a given precision", num_params=2),
+    Modf(ip=True,opcode="ip", desc="Integral part",num_params=1),
+    Modf(fp=True,opcode="fp", desc="Floating part",num_params=1),
+    Ceil(opcode="ceil", desc="Ceiling", num_params=1),
+    Floor(opcode="floor", desc="Floor", num_params=1),
+    Abs(opcode="abs", desc="Absolute value", num_params=1),
+    Min(opcode="min", desc="Minimum of two number", num_params=2),
+    Max(opcode="max", desc="Maximum", num_params=2)
+
 ]

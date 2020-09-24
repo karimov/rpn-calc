@@ -7,7 +7,8 @@ In this module, very basics of rpncalc operations are planed to implement
 * Display modes
 """
 import sys
-from .operators import basic_operators, Operator
+from .operators import basic_operators
+from .funcs import functional_operators
 from.stack import Stack #Command
 from .utility import display, ColorsSet, banner
 
@@ -20,7 +21,8 @@ class RpnCalc(object):
         '''Initializes empty stack to start off'''
         self.stack = Stack()
         self._operators = {op.opcode:op for op in basic_operators}
-        self.display_mode = 'dec'
+        self._operators.update({op.opcode: op for op in functional_operators}) 
+        self.display_mode = 'default'
         self._macros = {}
         self._register = {}
 
@@ -156,6 +158,9 @@ class RpnCalc(object):
                     display(self._register, "register",bg=ColorsSet.BrightBlue,bracket="[]")
                 display(self.stack, 'stack', bg=ColorsSet.BrightWhite,mode=self.display_mode)
             except KeyboardInterrupt:
+                sys.exit(1)
+            except Exception as e:
+                display(e, bg=ColorsSet.Red)
                 sys.exit(1)
 
     @staticmethod

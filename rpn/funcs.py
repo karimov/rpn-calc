@@ -7,6 +7,7 @@ trigonometric, mathematical functions,
 
 from math import atan, cosh
 from os import terminal_size
+import random
 from .operators import Operator
 
 import math
@@ -223,6 +224,22 @@ class Modf(Operator):
         return res, err
 
 
+class Constants(Operator):
+    import random
+    def __call__(self, x=0, y=0):
+        res, err = None, None
+        if self.opcode == "e":
+            return math.e, err
+        if self.opcode == "pi":
+            return math.pi, err
+        if self.opcode == "rand":
+            return random.random(), err
+        try:
+            res = random.randint(y, x)
+        except Exception as e:
+            return res, e
+        return res, err
+
 functional_operators = [
     # Trigonometric operators
     Cos(opcode="cos", desc="Cosine",num_params=1),
@@ -250,6 +267,11 @@ functional_operators = [
     Floor(opcode="floor", desc="Floor", num_params=1),
     Abs(opcode="abs", desc="Absolute value", num_params=1),
     Min(opcode="min", desc="Minimum of two number", num_params=2),
-    Max(opcode="max", desc="Maximum", num_params=2)
+    Max(opcode="max", desc="Maximum", num_params=2),
+    #Constants
+    Constants(opcode="e", desc="Push e", num_params=0),
+    Constants(opcode="pi", desc="Push pi", num_params=0),
+    Constants(opcode="rand", desc=" Generate a random number 0 < num < 1",num_params=0),
+    Constants(opcode="irand", desc="Returns an integer random value between 0 (inclusive) and x (exclusive)", num_params=1)
 
 ]

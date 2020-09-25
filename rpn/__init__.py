@@ -9,7 +9,7 @@ In this module, very basics of rpncalc operations are planed to implement
 import sys
 from .operators import basic_operators
 from .funcs import functional_operators
-from.stack import Stack #Command
+from.stack import Command, Stack #Command
 from .utility import display, ColorsSet, banner, help
 
 class RpnCalc(object):
@@ -81,12 +81,17 @@ class RpnCalc(object):
 
     def evaluate(self, commands):
         '''Push to stack and pop results'''
-        for cmd in commands:
+        for cmd in commands:          
             res, err = self.run_command(cmd)
             if err is not None:
                 display(err, bg=ColorsSet.Yellow) # TODO: change the way of printing the result
             if res is not None:
                 display(res, bg=ColorsSet.Green)
+
+    def evaluate_cli(self, commands):
+        '''Evaluate commands in cli mode'''
+        for cmd in commands:
+            yield self.run_command(cmd)
 
     def run_command(self, cmd): # TODO: checkout chain of responsibilities pattern
         res, err = None, None

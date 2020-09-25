@@ -10,7 +10,7 @@ import sys
 from .operators import basic_operators
 from .funcs import functional_operators
 from.stack import Stack #Command
-from .utility import display, ColorsSet, banner
+from .utility import display, ColorsSet, banner, help
 
 class RpnCalc(object):
     """"
@@ -93,7 +93,8 @@ class RpnCalc(object):
         if isinstance(cmd, (float, int)):
             self.stack.append(cmd)
             return res, err
-
+        elif cmd == "help":
+            print(help.__doc__)
         elif cmd in ["dec","hex","bin","ocd"]:
             self.set_display_mode(mode=cmd)
 

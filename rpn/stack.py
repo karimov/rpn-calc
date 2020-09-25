@@ -21,7 +21,9 @@ class Stack(object):
                             "swap":(self.swap,0),
                             "roll": (self.roll, 1),
                             "rolld":(self.rolld,1),
-                            "clr": (self.clear_stack, 0)}
+                            "clr": (self.clear_stack, 0),
+                            "read": (self.read_stack, 0),
+                            "peak": (self.peak, 0)}
 
     def append(self, value):
         self._stack.append(value)
@@ -63,11 +65,11 @@ class Stack(object):
             yield self._stack.pop()
             i += 1
 
-    def read_stack(self, n=1):
+    def read_stack(self):
         '''
-        Returns n elements of stack
+        Returns all elements of stack
         '''
-        return self._stack[:n]
+        return self._stack[:], None
 
     def clear_stack(self):
         '''
@@ -79,8 +81,8 @@ class Stack(object):
 
     def peak(self):
         if len(self) > 0:
-            return self._stack[-1]
-        return None
+            return self._stack[-1], None
+        return None,None
 
     def pick(self, n): # TDO: fix to pick right item
         res, err = None, None

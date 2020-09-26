@@ -4,10 +4,14 @@ The objective in this project is to build a complete, polished, but _small_ prod
 [reverse polish notation calculator](https://en.wikipedia.org/wiki/Reverse_Polish_notation) in the style of a unix command line tool.
 
 ## ToDo
+  * Pipelining feature
   * Major refactoring of `parser` and `run commands` methods
   * Fix `display_mode` switching 
   * Conditional operator :`?`:
   * Networking operators
+
+## Requirements
+`python-3.6+` and `pip`
 
 ## Installation
 Use the python package manager tool [pip](https://pip.pypa.io/en/stable/) to install package `rpn-calc` from source repository

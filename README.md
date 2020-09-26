@@ -6,9 +6,11 @@ The objective in this project is to build a complete, polished, but _small_ prod
 ## ToDo
   * Major refactoring of `parser` and `run commands` methods
   * Fix `display_mode` switching 
+  * Conditional operator :`?`:
+  * Networking operators
 
 ## Installation
-Use the python package manager tool [pip](https://pip.pypa.io/en/stable/ to install package `rpn-calc` from source repository
+Use the python package manager tool [pip](https://pip.pypa.io/en/stable/) to install package `rpn-calc` from source repository
 ```bash
 pip install git+https://git.unicon.uz/karimov/rpn-cal.git
 ```

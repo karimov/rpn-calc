@@ -6,9 +6,12 @@ README.md
 
 *.todo
 
-.vscode
+/.vscode/
 
-venv/
+/venv/
+/build/
+/dist/
+*.egg-info/
 env/
 
 __pycache__/

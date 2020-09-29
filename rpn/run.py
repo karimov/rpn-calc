@@ -15,7 +15,11 @@ def main_cli(expression):
             print(res)
 
 def main():
-    if len(sys.argv) == 1:
+    # use stdin if it is full
+    if not sys.stdin.isatty():
+        input_stream = sys.stdin
+        main_cli(input_stream.read())
+    elif len(sys.argv) == 1:
         main_interactive()
     else:
         exp = " ".join(sys.argv[1:]) # TODO: escape '*'

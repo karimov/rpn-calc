@@ -5,10 +5,10 @@ The objective in this project is to build a complete, polished, but _small_ prod
 
 ## ToDo
   - [x] Pipelining feature
-  - [] Major refactoring of `parser` and `run commands` methods
-  - [] Fix `display_mode` switching 
-  - [] Conditional operator :`?`:
-  - [] Networking operators
+  - [ ] Major refactoring of `parser` and `run commands` methods
+  - [ ] Fix `display_mode` switching 
+  - [ ] Conditional operator :`?`:
+  - [ ] Networking operators
 
 ## Requirements
 `python-3.6+` and `pip`
